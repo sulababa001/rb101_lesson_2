@@ -1,0 +1,23 @@
+en:
+  welcome: "Welcome to Calculator, please what is your name"
+  dash: "-------------------------------------------------"
+  inv_name: "That is an invalid entry, please enter your name"
+  num1: "Enter a number"
+  inv_num: "That is not a valid number, please enter a valid number"
+  num2: "Enter another number"
+  operator: "Select the operation you would like to perform"
+  must: "Must be 1, 2, 3, or 4"
+  would: "Would you like perform another calculation?"
+  bye: "Thank you, goodbye!"
+
+yb:
+  welcome: "ekaabo s'ori ero ishiro yi, ki ni oruko yin?"
+  dash: "------------------------------------------------"
+  inv_name: "eyiti ete yen o dara, kini oruko yin?"
+  num1: "e te nomba akoko ti efe se isiro re"
+  inv_num: "eyi ti ete yen o dara, e te number se!"
+  num2: "E te numba ikeji ti efe se isiro re:"
+  operator: "Iru isiro wo lefe se?"
+  must: "Oni lati je 1, 2, 3, or 4"
+  would: "Se fe se isiro si?"
+  bye: "Ese pupo, odabo!"
