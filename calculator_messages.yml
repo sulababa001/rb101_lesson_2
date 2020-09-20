@@ -1,23 +1,44 @@
 en:
-  welcome: "Welcome to Calculator, please what is your name"
+  welcome: "Welcome to Calculator, enter your name (spcaces not allowed use hyphen instead)"
+  greeting: "Hello, %{name}"
   dash: "-------------------------------------------------"
   inv_name: "That is an invalid entry, please enter your name"
   num1: "Enter a number"
   inv_num: "That is not a valid number, please enter a valid number"
   num2: "Enter another number"
-  operator: "Select the operation you would like to perform"
   must: "Must be 1, 2, 3, or 4"
-  would: "Would you like perform another calculation?"
+  zero: "You cannot divide a number by zero, enter the second number again!" 
+  would: "Do you want to perform another calculation? (Enter 'y' to continue or any key to exit)"
   bye: "Thank you, goodbye!"
+  operator: 
+    |
+    Select the operation you would like to perform << HERE
+
+    1 for Addition
+    2 for Subtraction
+    3 for Multiplication
+    4 for Division
+
+    HERE
 
 yb:
   welcome: "ekaabo s'ori ero ishiro yi, ki ni oruko yin?"
+  greeting: "Bawoni, %{name)"
   dash: "------------------------------------------------"
   inv_name: "eyiti ete yen o dara, kini oruko yin?"
   num1: "e te nomba akoko ti efe se isiro re"
   inv_num: "eyi ti ete yen o dara, e te number se!"
   num2: "E te numba ikeji ti efe se isiro re:"
-  operator: "Iru isiro wo lefe se?"
-  must: "Oni lati je 1, 2, 3, or 4"
-  would: "Se fe se isiro si?"
+  must: "Oni lati je 1, 2, 3, tabi 4"
+  zero: "Eti gbiyanju lati se isiro ti o wole!, e gbiyanju leekan si" 
+  would: "Se efe se isiro si? (E te 'y' lati tesiwaju tabi key omiran lati maalo)"
   bye: "Ese pupo, odabo!"
+  operator: 
+    |
+    E mu okan ninu iru awon isiro yi te fe se
+    1 fun Aropo
+    2 fun Iyokuro
+    3 fun Aropo nla
+    4 fun Adasi
+
+    HERE
