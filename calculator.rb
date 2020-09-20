@@ -2,6 +2,9 @@ require 'yaml'
 MESSAGES = YAML.load_file('calculator_messages.yml')
 LANGUAGE = 'en'
 
+num1 = ''
+num2 = ''
+
 def messages(message, lang)
   MESSAGES[lang][message]
 end
@@ -11,8 +14,8 @@ def prompt(key)
   Kernel.puts("=> #{message}")
 end
 
-def empty_string?(word)
-  word.empty?
+def name_invalid?(word)
+  word.match(/[  ]/) || word.empty?
 end
 
 def integer?(num)
@@ -21,6 +24,45 @@ end
 
 def float?(num)
   num.to_f
+end
+
+def get_name
+  name = ''
+  loop do
+    name = Kernel.gets().chomp()
+    if name_invalid?(name)
+      prompt('inv_name')
+    else
+      break
+    end
+  end
+  name
+end
+
+def get_number
+  num = ''
+  loop do
+    num = Kernel.gets().chomp()
+    if !num.match(/[a-z]/i) && integer?(num) && float?(num)
+      break
+    else
+      prompt('inv_num')
+    end
+  end
+  num
+end
+
+def get_operator
+  operator = ''
+  loop do
+    operator = Kernel.gets().chomp()
+    if %w(1 2 3 4).include?(operator)
+      break
+    else
+      prompt('must')
+    end
+  end
+  operator
 end
 
 def operator_to_message(op)
@@ -37,61 +79,7 @@ def operator_to_message(op)
   word
 end
 
-prompt('welcome')
-name = Kernel.gets().chomp()
-if empty_string?(name)
-  prompt('inv_name')
-else
-  Kernel.puts("Hello, #{name}")
-end
-prompt('dash')
-
-loop do
-  num1 = ''
-
-  loop do
-    prompt('num1')
-    num1 = Kernel.gets().chomp()
-    if integer?(num1) || float?(num1)
-      break
-    else
-      prompt('inv_num')
-    end
-  end
-
-  num2 = ''
-  loop do
-    prompt('num2')
-    num2 = Kernel.gets().chomp()
-    if integer?(num2) || float?(num2)
-      break
-    else
-      prompt('inv_num')
-    end
-  end
-
-  operator = <<-HEREDOC
-
-  1 for Addition
-  2 for Subtraction
-  3 for Multiplication
-  4 for Division
-  HEREDOC
-
-  prompt('operator')
-  puts("...and press enter #{operator}")
-
-  operation = ''
-
-  loop do
-    operation = gets().chomp()
-    if %w(1 2 3 4).include?(operation)
-      break
-    else
-      prompt('must')
-    end
-  end
-
+def calculate_result(num1, num2, operation)
   result = case operation
            when '1'
              num1.to_i() + num2.to_i()
@@ -100,12 +88,42 @@ loop do
            when '3'
              num1.to_i() * num2.to_i()
            when '4'
-             num1.to_f() / num2.to_f()
+             check_zero_division(num1, num2)
            end
-  Kernel.puts("#{operator_to_message(operation)} of the two numbers: #{result}")
+  result
+end
+
+def check_zero_division(num1, num2)
+  loop do
+    if num1.to_f != 0 && num2.to_f == 0
+      prompt('zero')
+      num2 = get_number()
+    else
+      break
+    end
+  end
+  num1.to_f() / num2.to_f()
+end
+
+prompt('dash')
+prompt('welcome')
+name = get_name()
+Kernel.puts 'Hello, ' + name + '!'
+
+loop do
+  prompt('num1')
+  num1 = get_number
+  prompt('num2')
+  num2 = get_number
+  prompt("operator")
+  operation = get_operator()
+  result = calculate_result(num1, num2, operation)
+  word = operator_to_message(operation)
+  Kernel.puts("#{word} of the two numbers is:  #{result}")
   prompt('dash')
   prompt('would')
   response = Kernel.gets().chomp()
-  break unless response.downcase.start_with?('y')
+  break if response.match(/[^y]/i)
+  puts "\e[H\e[2J"
 end
 prompt('bye')
